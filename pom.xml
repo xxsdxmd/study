@@ -23,6 +23,9 @@
         <java.version>1.8</java.version>
         <mapstruct-version>1.5.2.Final</mapstruct-version>
         <vavr-version>0.10.1</vavr-version>
+        <commons-lang3-verison>3.4</commons-lang3-verison>
+        <transmittable-thread-local-version>2.10.1</transmittable-thread-local-version>
+        <cloning-version>1.10.3</cloning-version>
     </properties>
 
 
@@ -49,7 +52,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -73,10 +76,27 @@
         </dependency>
 
 
+        <!-- commons-lang3 -->
         <dependency>
-            <groupId></groupId>
-            <artifactId>spring-boot-starter-</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
+
+
+        <!-- transmittable-thread-local -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>${transmittable-thread-local-version}</version>
+        </dependency>
+
+        <!-- cloning -->
+        <dependency>
+            <groupId>io.github.kostaskougios</groupId>
+            <artifactId>cloning</artifactId>
+            <version>${cloning-version}</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -89,6 +109,8 @@
                 <configuration>
                     <source>1.8</source> <!-- 根据你的 JDK 版本进行调整 -->
                     <target>1.8</target> <!-- 根据你的 JDK 版本进行调整 -->
+                    <encoding>UTF-8</encoding>
+                    <skip>true</skip>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
