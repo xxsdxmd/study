@@ -1,10 +1,9 @@
 package com.example.opstudycommon.support;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.opstudycommon.validator.UpdateGroup;
 import com.google.common.base.Preconditions;
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
-import domain.repository.RepositorySupport;
+import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -17,19 +16,19 @@ import java.util.function.Supplier;
  * @Date 2024/6/29 23:12
  */
 @Slf4j
-public class EntityCreator<T extends Aggregate<ID>, ID extends Identifier> extends BaseEntityOperation implements Create<T, ID>, UpdateHandler<T, ID>, Executor<T> {
+public class EntityCreator<T> extends BaseEntityOperation implements Create<T>, UpdateHandler<T>, Executor<T> {
 
-    private final RepositorySupport<T,ID> repositorySupport;
+    private final BaseMapper<T> baseMapper;
     private T t;
     private Consumer<T> successHook = t -> log.info("update success");
     private Consumer<? super Throwable> errorHook = Throwable::printStackTrace;
 
-    public EntityCreator(RepositorySupport<T, ID> repositorySupport) {
-        this.repositorySupport = repositorySupport;
+    public EntityCreator(BaseMapper<T> baseMapper) {
+        this.baseMapper = baseMapper;
     }
 
     @Override
-    public UpdateHandler<T, ID> create(Supplier<T> supplier) {
+    public UpdateHandler<T> create(Supplier<T> supplier) {
         this.t = supplier.get();
         return this;
     }
@@ -37,8 +36,11 @@ public class EntityCreator<T extends Aggregate<ID>, ID extends Identifier> exten
     @Override
     public Optional<T> executor() {
         doValidator(this.t, UpdateGroup.class);
-        repositorySupport.save(t);
-        return Optional.empty();
+        T save = Try.of(() -> {
+            baseMapper.insert(t);
+            return this.t;
+        }).onSuccess(successHook).onFailure(errorHook).getOrNull();
+        return Optional.ofNullable(save);
     }
 
     @Override

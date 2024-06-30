@@ -1,13 +1,12 @@
 package com.example.opstudycommon.support;
 
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.opstudycommon.validator.UpdateGroup;
 import com.google.common.base.Preconditions;
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
-import domain.repository.RepositorySupport;
+import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -19,22 +18,25 @@ import java.util.function.Supplier;
  * step builder
  */
 @Slf4j
-public class EntityUpdater<T extends Aggregate<ID>, ID extends Identifier> extends BaseEntityOperation implements Loader<T, ID>, UpdateHandler<T, ID>, Executor<T> {
+public class EntityUpdater<T> extends BaseEntityOperation implements Loader<T>, UpdateHandler<T>, Executor<T> {
 
-    private final RepositorySupport<T,ID> repositorySupport;
+    private final BaseMapper<T> baseMapper;
     private T entity;
     private Consumer<T> successHook = t -> log.info("update success");
     private Consumer<? super Throwable> errorHook = Throwable::printStackTrace;
 
-    public EntityUpdater(RepositorySupport<T, ID> repositorySupport) {
-        this.repositorySupport = repositorySupport;
+    public EntityUpdater(BaseMapper<T> baseMapper) {
+        this.baseMapper = baseMapper;
     }
 
     @Override
     public Optional<T> executor() {
         doValidator(this.entity, UpdateGroup.class);
-        repositorySupport.save(entity);
-        return Optional.empty();
+        T save = Try.of(() -> {
+            baseMapper.updateById(entity);
+            return this.entity;
+        }).onSuccess(successHook).onFailure(errorHook).getOrNull();
+        return Optional.ofNullable(save);
     }
 
     @Override
@@ -50,14 +52,19 @@ public class EntityUpdater<T extends Aggregate<ID>, ID extends Identifier> exten
     }
 
     @Override
-    public UpdateHandler<T,ID> loadById(ID id) {
+    public UpdateHandler<T> loadById(Serializable id) {
         Preconditions.checkArgument(Objects.nonNull(id), "id is null");
-        this.entity = repositorySupport.find(id);
+        T t = baseMapper.selectById(id);
+        if(Objects.isNull(t)){
+            throw new RuntimeException("id is null");
+        }else {
+            this.entity = t;
+        }
         return this;
     }
 
     @Override
-    public UpdateHandler<T,ID> load(Supplier<T> t) {
+    public UpdateHandler<T> load(Supplier<T> t) {
         this.entity = t.get();
         return this;
     }

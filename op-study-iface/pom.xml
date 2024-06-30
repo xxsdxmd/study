@@ -22,12 +22,14 @@
     </properties>
 
     <dependencies>
+
         <!-- common -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>op-study-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
 
     </dependencies>
 

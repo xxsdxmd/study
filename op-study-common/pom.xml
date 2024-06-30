@@ -16,15 +16,17 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <op-study-domain-version>0.0.1-SNAPSHOT</op-study-domain-version>
+        <mybatis-plus-version>3.5.7</mybatis-plus-version>
     </properties>
 
     <dependencies>
 
+
+        <!-- mybatis plus -->
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>op-study-domain</artifactId>
-            <version>${op-study-domain-version}</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-version}</version>
         </dependency>
 
     </dependencies>

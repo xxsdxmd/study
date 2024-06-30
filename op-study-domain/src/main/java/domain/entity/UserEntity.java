@@ -1,12 +1,13 @@
 package domain.entity;
 
 import domain.iface.Aggregate;
-import domain.iface.Entity;
+import lombok.Data;
 
 /**
  * @author xxs
  * @Date 2024/6/29 1:02
  */
+@Data
 public class UserEntity implements Aggregate<UserId> {
 
     /**
@@ -14,11 +15,15 @@ public class UserEntity implements Aggregate<UserId> {
      */
     private UserId userId;
 
-
     /**
      * 用户名
      */
     private String userName;
+
+    /**
+     * 手机号
+     */
+    private String mobilePhone;
 
 
     @Override

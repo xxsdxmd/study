@@ -1,8 +1,5 @@
 package com.example.opstudycommon.support;
-
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
-import domain.repository.RepositorySupport;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * @author xxs
@@ -10,12 +7,12 @@ import domain.repository.RepositorySupport;
  */
 public class EntityOperations {
 
-    public static <T extends Aggregate<ID>, ID extends Identifier> EntityUpdater<T,ID> doUpdate(RepositorySupport<T, ID> repositorySupport) {
-        return new EntityUpdater(repositorySupport);
+    public static <T> EntityUpdater<T> doUpdate(BaseMapper<T> baseMapper) {
+        return new EntityUpdater(baseMapper);
     }
 
-    public static <T extends Aggregate<ID>, ID extends Identifier> EntityCreator<T, ID> doCreate(RepositorySupport<T, ID> repositorySupport) {
-        return new EntityCreator(repositorySupport);
+    public static <T> EntityCreator<T> doCreate(BaseMapper<T> baseMapper) {
+        return new EntityCreator(baseMapper);
     }
 
 

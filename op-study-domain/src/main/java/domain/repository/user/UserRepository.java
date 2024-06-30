@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 /**
  * @author xxs
  * @Date 2024/6/29 1:05
+ * 这层其实可以不用再搞一个
+ * UserService proxy了
  */
 @Service
 public class UserRepository extends RepositorySupport<UserEntity, UserId> {
+
 
 
     public UserRepository() {
