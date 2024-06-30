@@ -1,6 +1,6 @@
 package com.example.iface.user;
 
-import com.example.model.UserRequest;
+import com.example.application.iface.model.UserRequest;
 import com.example.opstudycommon.result.Result;
 
 /**

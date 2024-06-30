@@ -1,5 +1,8 @@
 package domain.repository.user;
 
+import db.mp.dao.UserDao;
+import db.mp.service.UserService;
+import domain.assembler.UserConvert;
 import domain.diff.EntityDiff;
 import domain.entity.UserEntity;
 import domain.entity.UserId;
@@ -15,21 +18,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRepository extends RepositorySupport<UserEntity, UserId> {
 
+    private final UserService userService;
+    private final UserConvert userConvert;
 
-
-    public UserRepository() {
+    public UserRepository(UserService userService, UserConvert userConvert) {
         super(UserEntity.class);
+        this.userService = userService;
+        this.userConvert = userConvert;
     }
 
 
     @Override
     protected void onInsert(UserEntity agg) {
-
     }
 
     @Override
     protected UserEntity onSelect(UserId userId) {
-        return null;
+        UserDao userDao = userService.getById(userId.getUserId());
+        return userConvert.convertUserEntity(userDao);
     }
 
     @Override

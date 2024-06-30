@@ -19,18 +19,20 @@
     <properties>
         <java.version>1.8</java.version>
         <op-study-comon-version>0.0.1-SNAPSHOT</op-study-comon-version>
-        <op-study-infrastructure-verison>0.0.1-SNAPSHOT</op-study-infrastructure-verison>
+        <op-study-infrastructure-verison>0.0.2-SNAPSHOT</op-study-infrastructure-verison>
     </properties>
 
     <dependencies>
 
+        <!-- common -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>op-study-common</artifactId>
             <version>${op-study-comon-version}</version>
         </dependency>
 
-        <!-- op-study-infrastructure -->
+
+        <!-- infrastructure -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>op-study-infrastructure</artifactId>

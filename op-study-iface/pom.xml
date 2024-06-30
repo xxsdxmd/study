@@ -19,6 +19,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <op-study-application-version>0.0.1-SNAPSHOT</op-study-application-version>
     </properties>
 
     <dependencies>
@@ -30,6 +31,12 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- application -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>op-study-application</artifactId>
+            <version>${op-study-application-version}</version>
+        </dependency>
 
     </dependencies>
 

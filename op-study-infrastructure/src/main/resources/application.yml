@@ -5,3 +5,13 @@ spring:
     url: jdbc:mysql://localhost:3306/study
     username: root
     password: test
+
+mybatis-plus:
+  configuration:
+    # MyBatis 配置
+    map-underscore-to-camel-case: true
+  global-config:
+    # 全局配置
+    db-config:
+      # 数据库配置
+      id-type: auto
