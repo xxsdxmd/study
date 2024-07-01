@@ -1,6 +1,6 @@
 package domain.entity;
 
-import domain.iface.Aggregate;
+import domain.marker.Aggregate;
 import lombok.Data;
 
 /**

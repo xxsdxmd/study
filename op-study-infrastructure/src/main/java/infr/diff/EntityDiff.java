@@ -1,4 +1,4 @@
-package domain.diff;
+package infr.diff;
 
 import lombok.AccessLevel;
 import lombok.Getter;

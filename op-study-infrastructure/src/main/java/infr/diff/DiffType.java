@@ -1,4 +1,4 @@
-package domain.diff;
+package infr.diff;
 
 /**
  * @author xxs

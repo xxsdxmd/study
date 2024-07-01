@@ -1,9 +1,11 @@
-package domain.repository;
+package infr.repo;
 
-import domain.diff.EntityDiff;
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
-import domain.mannger.AggregateManager;
+
+import infr.diff.EntityDiff;
+import infr.mannger.AggregateManager;
+import domain.marker.Aggregate;
+import domain.marker.Identifier;
+import domain.repository.Repository;
 import lombok.AccessLevel;
 import lombok.Getter;
 

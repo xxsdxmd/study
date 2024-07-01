@@ -1,4 +1,4 @@
-package domain.diff;
+package infr.diff;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.util.CollectionUtils;

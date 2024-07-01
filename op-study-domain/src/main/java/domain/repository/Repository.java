@@ -1,13 +1,14 @@
 package domain.repository;
 
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
+import domain.marker.Aggregate;
+import domain.marker.Identifier;
 
 
 /**
  * @author xxs
  * @Date 2024/6/29 0:56
  * repository
+ * 实现由infra实现
  */
 public interface Repository<T extends Aggregate<ID>, ID extends Identifier> {
 

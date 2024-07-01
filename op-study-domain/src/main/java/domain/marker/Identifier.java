@@ -1,4 +1,4 @@
-package domain.iface;
+package domain.marker;
 
 import java.io.Serializable;
 

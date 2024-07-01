@@ -19,7 +19,6 @@
     <properties>
         <java.version>1.8</java.version>
         <op-study-comon-version>0.0.1-SNAPSHOT</op-study-comon-version>
-        <op-study-infrastructure-verison>0.0.2-SNAPSHOT</op-study-infrastructure-verison>
     </properties>
 
     <dependencies>
@@ -32,13 +31,6 @@
         </dependency>
 
 
-        <!-- infrastructure -->
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>op-study-infrastructure</artifactId>
-            <version>${op-study-infrastructure-verison}</version>
-            <scope>compile</scope>
-        </dependency>
 
 
     </dependencies>

@@ -1,7 +1,7 @@
-package domain.diff;
+package infr.diff;
 
-import domain.iface.Entity;
-import domain.iface.Identifier;
+import domain.marker.Entity;
+import domain.marker.Identifier;
 import io.vavr.API;
 
 import java.lang.reflect.Field;
@@ -41,9 +41,9 @@ public class DiffUtils {
             Object newVal = ReflectionUtils.readField(subField, newValue);
             DiffBuilder finalDiffBuilder = diffBuilder;
             diffBuilder = API.Match(fetchModifyEntityType(subFieldType, oldVal, newVal))
-                    .of(Case($(ModifyEntityType.MODIFY_LIST), () -> fetchModifyEntityListDiffBuilder(subField, oldVal, newVal, finalDiffBuilder)),
-                           Case($(ModifyEntityType.MODIFY_ENTITY), () -> fetchModifyEntityDiffBuilder(subField, oldVal, newVal, finalDiffBuilder)),
-                            Case($(ModifyEntityType.MODIFY_PROPERTY), () -> fetchModifyPropertyDiffBuilder(subField, oldVal, newVal, finalDiffBuilder)));
+                    .of(Case(API.$(ModifyEntityType.MODIFY_LIST), () -> fetchModifyEntityListDiffBuilder(subField, oldVal, newVal, finalDiffBuilder)),
+                           Case(API.$(ModifyEntityType.MODIFY_ENTITY), () -> fetchModifyEntityDiffBuilder(subField, oldVal, newVal, finalDiffBuilder)),
+                            Case(API.$(ModifyEntityType.MODIFY_PROPERTY), () -> fetchModifyPropertyDiffBuilder(subField, oldVal, newVal, finalDiffBuilder)));
 
         }
         return diffBuilder.build();

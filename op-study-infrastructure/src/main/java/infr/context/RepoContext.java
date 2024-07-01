@@ -1,10 +1,10 @@
-package domain.context;
+package infr.context;
 
 import com.rits.cloning.Cloner;
-import domain.diff.DiffUtils;
-import domain.diff.EntityDiff;
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
+import infr.diff.DiffUtils;
+import infr.diff.EntityDiff;
+import domain.marker.Aggregate;
+import domain.marker.Identifier;
 import lombok.Getter;
 
 import java.util.Map;

@@ -1,6 +1,6 @@
 package domain.entity;
 
-import domain.iface.Identifier;
+import domain.marker.Identifier;
 import lombok.Data;
 
 import java.io.Serializable;

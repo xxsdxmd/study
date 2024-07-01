@@ -1,13 +1,13 @@
-package domain.diff;
+package infr.diff;
 
 import lombok.Value;
 
 /**
  * @author xxs
- * @Date 2024/6/29 17:05
+ * @Date 2024/6/29 16:44
  */
 @Value
-public class PropertyDiff implements Diff {
+public class ListItemDiff implements Diff {
 
     String fieldName;
 

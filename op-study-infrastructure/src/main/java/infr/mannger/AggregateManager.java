@@ -1,8 +1,9 @@
-package domain.mannger;
+package infr.mannger;
 
-import domain.diff.EntityDiff;
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
+import infr.diff.EntityDiff;
+import domain.marker.Aggregate;
+import domain.marker.Identifier;
+
 
 /**
  * @author xxs

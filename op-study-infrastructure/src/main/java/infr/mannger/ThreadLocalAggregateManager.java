@@ -1,10 +1,11 @@
-package domain.mannger;
+package infr.mannger;
+
 
 import com.alibaba.ttl.TransmittableThreadLocal;
-import domain.context.RepoContext;
-import domain.diff.EntityDiff;
-import domain.iface.Aggregate;
-import domain.iface.Identifier;
+import infr.context.RepoContext;
+import infr.diff.EntityDiff;
+import domain.marker.Aggregate;
+import domain.marker.Identifier;
 
 /**
  * @author xxs

@@ -18,6 +18,7 @@
         <java.version>1.8</java.version>
         <mysql-connector-version>8.0.29</mysql-connector-version>
         <op-studuy-common-version>0.0.1-SNAPSHOT</op-studuy-common-version>
+        <op-study-domain-version>0.0.1-SNAPSHOT</op-study-domain-version>
     </properties>
 
 
@@ -35,6 +36,13 @@
             <groupId>com.example</groupId>
             <artifactId>op-study-common</artifactId>
             <version>${op-studuy-common-version}</version>
+        </dependency>
+
+        <!-- domain -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>op-study-domain</artifactId>
+            <version>${op-study-domain-version}</version>
         </dependency>
 
 

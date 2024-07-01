@@ -1,6 +1,6 @@
-package domain.diff;
+package infr.diff;
 
-import domain.iface.Entity;
+import domain.marker.Entity;
 import lombok.Builder;
 import org.springframework.util.CollectionUtils;
 
