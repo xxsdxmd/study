@@ -7,7 +7,7 @@ import com.example.opstudycommon.result.Result;
  * @author xxs
  * @Date 2024/6/28 22:10
  */
-public interface UserIface {
+public interface UserIFace {
 
     /**
      * 用户注册

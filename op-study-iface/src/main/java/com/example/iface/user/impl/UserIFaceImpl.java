@@ -2,7 +2,7 @@ package com.example.iface.user.impl;
 
 import com.example.application.iface.model.UserRequest;
 import com.example.application.iface.user.UserService;
-import com.example.iface.user.UserIface;
+import com.example.iface.user.UserIFace;
 import com.example.opstudycommon.result.Result;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
  * @Date 2024/6/30 21:08
  */
 @Component
-public class UserIfaceImpl implements UserIface {
+public class UserIFaceImpl implements UserIFace {
 
     private final UserService userService;
 
-    public UserIfaceImpl(UserService userService) {
+    public UserIFaceImpl(UserService userService) {
         this.userService = userService;
     }
 
