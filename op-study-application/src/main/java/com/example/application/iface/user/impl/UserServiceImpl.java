@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         FilterSelector userFilterSelector = factory.getFilterSelector(EnumFilterSelectorScene.USER);
         UserRequestContext userRequestContext = buildUserRequestContext(userRequest,userFilterSelector);
         userChainFactory.getDefaultFilterChain().handler(userRequestContext);
-        return null;
+        return Result.builder().build();
     }
 
 
