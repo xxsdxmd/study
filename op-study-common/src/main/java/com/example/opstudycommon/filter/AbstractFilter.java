@@ -9,7 +9,7 @@ import com.example.opstudycommon.filter.context.Context;
 public abstract class AbstractFilter<T extends Context> implements Filter<T> {
 
     @Override
-    public void filter(T context, FilterChain filterChain) {
+    public void filter(T context, FilterChain<T> filterChain) {
         if (context.getFilterSelector().matchFilter(this.getClass().getSimpleName())) {
             this.handle(context);
         }

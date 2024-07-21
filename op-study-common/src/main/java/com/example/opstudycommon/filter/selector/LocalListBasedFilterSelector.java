@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class LocalListBasedFilterSelector implements FilterSelector {
 
-    private List<String> filterNameLists = Lists.newArrayList();
+    private final List<String> filterNameLists = Lists.newArrayList();
     @Override
     public boolean matchFilter(String filterNames) {
         return filterNameLists.stream().anyMatch(data -> Objects.equals(data, filterNames));

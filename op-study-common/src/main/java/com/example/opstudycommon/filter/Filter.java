@@ -10,5 +10,5 @@ import com.example.opstudycommon.filter.context.Context;
 public interface Filter<T extends Context> {
 
 
-    void filter(T context, FilterChain filterChain);
+    void filter(T context, FilterChain<T> filterChain);
 }

@@ -2,11 +2,9 @@ package com.example.application.iface.user.impl;
 
 import com.example.application.iface.model.UserRequest;
 import com.example.application.iface.user.UserService;
-import com.example.application.iface.user.factory.UserChainFactory;
 import com.example.application.iface.user.model.UserRequestContext;
 import com.example.opstudycommon.enums.EnumFilterSelectorScene;
 import com.example.application.iface.user.factory.FilterSelectorFactory;
-import com.example.opstudycommon.filter.DefaultFilterChain;
 import com.example.opstudycommon.filter.selector.FilterSelector;
 import com.example.opstudycommon.result.Result;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +24,12 @@ public class UserServiceImpl implements UserService {
 
 
     private FilterSelectorFactory factory;
-    private UserChainFactory userChainFactory;
 
     @Override
     public Result<?> registerUser(@Valid UserRequest userRequest) {
         FilterSelector userFilterSelector = factory.getFilterSelector(EnumFilterSelectorScene.USER);
         UserRequestContext userRequestContext = buildUserRequestContext(userRequest,userFilterSelector);
-        userChainFactory.getDefaultFilterChain().handler(userRequestContext);
-        return Result.builder().build();
+        return Result.success();
     }
 
 

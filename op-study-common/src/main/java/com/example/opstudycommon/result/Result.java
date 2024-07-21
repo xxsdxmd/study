@@ -19,4 +19,9 @@ public class Result<T> {
     private String msg;
     private T data;
 
+
+
+    public static <T> Result<?> success() {
+        return Result.builder().code(200).msg("成功").build();
+    }
 }

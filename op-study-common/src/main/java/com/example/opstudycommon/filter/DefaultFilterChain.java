@@ -10,8 +10,8 @@ import java.util.Objects;
  */
 public class DefaultFilterChain<T extends Context> implements FilterChain<T> {
 
-    private FilterChain<T> next;
-    private Filter<T> filter;
+    private final FilterChain<T> next;
+    private final Filter<T> filter;
 
     public DefaultFilterChain(FilterChain<T> next,  Filter<T> filter) {
         this.next = next;
@@ -25,7 +25,7 @@ public class DefaultFilterChain<T extends Context> implements FilterChain<T> {
 
     @Override
     public void fireNext(T context) {
-        FilterChain nextChain = this.next;
+        FilterChain<T> nextChain = this.next;
         if (Objects.nonNull(nextChain)) {
             nextChain.handler(context);
         }
