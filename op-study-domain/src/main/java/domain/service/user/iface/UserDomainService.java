@@ -8,7 +8,7 @@ import domain.entity.UserId;
  * @Date 2024/7/1 22:30
  * 领域服务 这是核心的service
  */
-public interface UserService {
+public interface UserDomainService {
 
     /**
      * 根据id查询user

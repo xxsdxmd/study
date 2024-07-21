@@ -7,6 +7,9 @@ import com.example.opstudycommon.enums.EnumFilterSelectorScene;
 import com.example.application.iface.user.factory.FilterSelectorFactory;
 import com.example.opstudycommon.filter.selector.FilterSelector;
 import com.example.opstudycommon.result.Result;
+import domain.entity.UserEntity;
+import domain.entity.UserId;
+import domain.service.user.iface.UserDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +28,11 @@ public class UserServiceImpl implements UserService {
 
     private FilterSelectorFactory factory;
 
+    private UserDomainService userDomainService;
+
     @Override
     public Result<?> registerUser(@Valid UserRequest userRequest) {
+        UserEntity userEntity = userDomainService.selectById(new UserId(userRequest.getId()));
         FilterSelector userFilterSelector = factory.getFilterSelector(EnumFilterSelectorScene.USER);
         UserRequestContext userRequestContext = buildUserRequestContext(userRequest,userFilterSelector);
         return Result.success();

@@ -3,7 +3,7 @@ package domain.service.user.iface.impl;
 import domain.entity.UserEntity;
 import domain.entity.UserId;
 import domain.repository.Repository;
-import domain.service.user.iface.UserService;
+import domain.service.user.iface.UserDomainService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @Date 2024/7/1 22:31
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserDomainService {
 
     private final Repository<UserEntity, UserId> userRepository;
 
