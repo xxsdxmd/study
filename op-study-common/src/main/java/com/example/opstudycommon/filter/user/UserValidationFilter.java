@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 public class UserValidationFilter extends AbstractFilter<Context> {
 
     @Override
-    public void filter(Context context, FilterChain<Context> filterChain) {
+    protected void handle(Context context) {
         log.info("执行用户验证过滤器");
         
         // 获取用户请求数据
@@ -28,9 +28,6 @@ public class UserValidationFilter extends AbstractFilter<Context> {
         
         // 这里可以添加具体的验证逻辑
         validateUserData(userRequest);
-        
-        // 继续执行下一个过滤器
-        filterChain.filter(context);
     }
     
     private void validateUserData(Object userRequest) {
@@ -42,5 +39,4 @@ public class UserValidationFilter extends AbstractFilter<Context> {
     public int getOrder() {
         return 1;
     }
-} 
- 
+}

@@ -16,14 +16,11 @@ import org.springframework.stereotype.Component;
 public class UserDuplicateCheckFilter extends AbstractFilter<Context> {
 
     @Override
-    public void filter(Context context, FilterChain<Context> filterChain) {
+    protected void handle(Context context) {
         log.info("执行用户重复检查过滤器");
         
         // 检查用户是否已存在
         checkUserDuplicate(context);
-        
-        // 继续执行下一个过滤器
-        filterChain.filter(context);
     }
     
     private void checkUserDuplicate(Context context) {
@@ -43,4 +40,4 @@ public class UserDuplicateCheckFilter extends AbstractFilter<Context> {
     public int getOrder() {
         return 2;
     }
-} 
+}

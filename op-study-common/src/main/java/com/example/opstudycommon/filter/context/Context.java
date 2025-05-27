@@ -12,4 +12,11 @@ public interface Context {
     FilterSelector getFilterSelector();
 
     boolean continueChain();
+    
+    /**
+     * 获取上下文中的对象
+     * @param key 键
+     * @return 值
+     */
+    Object get(String key);
 }
