@@ -30,4 +30,14 @@ public class LocalListBasedFilterSelector implements FilterSelector {
     public void addFilter(String clsNames) {
         this.filterNameLists.add(clsNames);
     }
+
+    /**
+     * 批量添加filters
+     * @param filterNames
+     */
+    public void addFilters(List<String> filterNames) {
+        if (filterNames != null && !filterNames.isEmpty()) {
+            this.filterNameLists.addAll(filterNames);
+        }
+    }
 }

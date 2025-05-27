@@ -21,6 +21,12 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        
+        <!-- 版本属性 -->
         <mapstruct-version>1.5.2.Final</mapstruct-version>
         <vavr-version>0.10.1</vavr-version>
         <commons-lang3-verison>3.4</commons-lang3-verison>
@@ -29,6 +35,12 @@
         <validation-api-version>2.0.1.Final</validation-api-version>
         <guava-version>22.0</guava-version>
         <mybatis-plus-version>3.5.7</mybatis-plus-version>
+        
+        <!-- 编译优化 -->
+        <maven.compiler.fork>true</maven.compiler.fork>
+        <maven.compiler.maxmem>1024m</maven.compiler.maxmem>
+        <maven.test.skip>true</maven.test.skip>
+        <skipTests>true</skipTests>
     </properties>
 
 
@@ -122,6 +134,45 @@
             <version>${mybatis-plus-version}</version>
         </dependency>
 
+        <!-- MySQL驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- H2数据库 - 用于快速开发 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Swagger3 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.14</version>
+        </dependency>
+
+        <!-- Spring Boot Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Data JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Data Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -130,19 +181,59 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- 使用时请检查最新版本 -->
+                <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source> <!-- 根据你的 JDK 版本进行调整 -->
-                    <target>1.8</target> <!-- 根据你的 JDK 版本进行调整 -->
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                    <skip>true</skip>
+                    <fork>true</fork>
+                    <maxmem>1024m</maxmem>
+                    <compilerArgs>
+                        <arg>-Xlint:none</arg>
+                        <arg>-J-XX:+TieredCompilation</arg>
+                        <arg>-J-XX:TieredStopAtLevel=1</arg>
+                    </compilerArgs>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct-version}</version> <!-- 使用时请检查最新版本 -->
+                            <version>${mapstruct-version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.26</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>0.2.0</version>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            
+            <!-- 跳过测试插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                    <fork>true</fork>
+                    <jvmArguments>-Xmx1024m -XX:+TieredCompilation -XX:TieredStopAtLevel=1</jvmArguments>
                 </configuration>
             </plugin>
         </plugins>

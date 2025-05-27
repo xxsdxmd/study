@@ -5,13 +5,19 @@ import com.example.opstudycommon.filter.context.AbstractContext;
 import com.example.opstudycommon.filter.selector.FilterSelector;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author xxs
  * @Date 2024/7/2 22:35
- * 上下文
+ * 用户请求上下文
  */
+@Data
 @Builder
-public class UserRequestContext extends AbstractContext  {
+@EqualsAndHashCode(callSuper = true)
+public class UserRequestContext extends AbstractContext {
 
     @Getter
     @Setter
@@ -21,13 +27,83 @@ public class UserRequestContext extends AbstractContext  {
     @Setter
     private UserRequest userRequest;
 
+    /**
+     * 请求时间
+     */
+    @Builder.Default
+    private LocalDateTime requestTime = LocalDateTime.now();
+
+    /**
+     * 请求ID，用于链路追踪
+     */
+    private String requestId;
+
+    /**
+     * 操作用户ID
+     */
+    private Long operatorId;
+
+    /**
+     * 扩展属性
+     */
+    @Builder.Default
+    private Map<String, Object> attributes = new HashMap<>();
 
     public UserRequestContext(FilterSelector filterSelector) {
         super(filterSelector);
+        this.filterSelector = filterSelector;
+        this.requestTime = LocalDateTime.now();
+    }
+
+    public UserRequestContext(FilterSelector filterSelector, UserRequest userRequest) {
+        super(filterSelector);
+        this.filterSelector = filterSelector;
+        this.userRequest = userRequest;
+        this.requestTime = LocalDateTime.now();
     }
 
     @Override
     public boolean continueChain() {
         return true;
+    }
+
+    /**
+     * 添加属性
+     */
+    public void setAttribute(String key, Object value) {
+        this.attributes.put(key, value);
+    }
+
+    /**
+     * 获取属性
+     */
+    public Object getAttribute(String key) {
+        return this.attributes.get(key);
+    }
+
+    /**
+     * 获取属性，带默认值
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T getAttribute(String key, T defaultValue) {
+        Object value = this.attributes.get(key);
+        return value != null ? (T) value : defaultValue;
+    }
+
+    /**
+     * 获取对象（兼容Context接口）
+     */
+    public Object get(String key) {
+        if ("userRequest".equals(key)) {
+            return this.userRequest;
+        }
+        return getAttribute(key);
+    }
+
+    /**
+     * 检查是否包含属性
+     */
+    public boolean hasAttribute(String key) {
+        return this.attributes.containsKey(key);
     }
 }
