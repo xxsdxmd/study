@@ -22,6 +22,7 @@ import java.util.Optional;
  * 用户仓储实现
  */
 @Slf4j
+@Repository
 public class UserRepositoryImpl extends RepositorySupport<UserEntity, UserId> implements UserRepository {
 
     private final UserService userService;

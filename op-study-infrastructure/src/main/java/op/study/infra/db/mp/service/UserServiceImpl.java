@@ -26,7 +26,7 @@ import java.util.List;
  * 用户数据服务实现
  */
 @Slf4j
-@Service
+@Service("userDataService")
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserDao> implements UserService {
 
     private final ApplicationEventPublisher eventPublisher;

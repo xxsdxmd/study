@@ -17,7 +17,7 @@ public class Pipeline<I,O> {
         return new Pipeline<>(input -> handler.handler(currentHandler.handler(input)));
     }
 
-    O execute(I input) {
+    public O execute(I input) {
         return currentHandler.handler(input);
     }
 

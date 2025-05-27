@@ -34,7 +34,26 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- infrastructure -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>op-study-infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

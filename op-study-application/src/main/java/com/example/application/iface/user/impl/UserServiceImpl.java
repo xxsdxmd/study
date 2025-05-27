@@ -29,7 +29,7 @@ import java.util.UUID;
  * 应用层服务实现 - 主要做流程编排
  */
 @Slf4j
-@Service
+@Service("userApplicationService")
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 

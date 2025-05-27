@@ -30,17 +30,33 @@ public interface UserAssembler {
      */
     @Mapping(source = "userId", target = "userId", qualifiedByName = "userIdToLong")
     @Mapping(source = "status", target = "status", qualifiedByName = "userStatusToInteger")
+    @Mapping(target = "id", ignore = true)  // 忽略主键ID，由数据库自动生成
+    @Mapping(target = "deleted", ignore = true)  // 忽略逻辑删除字段，使用默认值
     UserDao convertUserDao(UserEntity userEntity);
 
     /**
      * UserDao列表转UserEntity列表
      */
-    List<UserEntity> convertUserEntityList(List<UserDao> userDaoList);
+    default List<UserEntity> convertUserEntityList(List<UserDao> userDaoList) {
+        if (userDaoList == null) {
+            return null;
+        }
+        return userDaoList.stream()
+                .map(this::convertUserEntity)
+                .collect(java.util.stream.Collectors.toList());
+    }
 
     /**
      * UserEntity列表转UserDao列表
      */
-    List<UserDao> convertUserDaoList(List<UserEntity> userEntityList);
+    default List<UserDao> convertUserDaoList(List<UserEntity> userEntityList) {
+        if (userEntityList == null) {
+            return null;
+        }
+        return userEntityList.stream()
+                .map(this::convertUserDao)
+                .collect(java.util.stream.Collectors.toList());
+    }
 
     /**
      * Long转UserId

@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class UserRequest {
 
-    @NotNull
     private Long id;
 
     @NotBlank(message = "userName is not null")
