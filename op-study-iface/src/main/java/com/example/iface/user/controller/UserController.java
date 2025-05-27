@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * @author xxs
@@ -134,7 +135,7 @@ public class UserController {
             @Parameter(description = "搜索关键字") @RequestParam String keyword) {
         log.info("搜索用户请求: keyword={}", keyword);
         try {
-            var users = userService.searchUsers(keyword);
+            List<UserEntity> users = userService.searchUsers(keyword);
             return Result.success("搜索成功", users);
         } catch (Exception e) {
             log.error("搜索用户失败: keyword={}, error={}", keyword, e.getMessage(), e);
@@ -149,7 +150,7 @@ public class UserController {
             @Parameter(description = "页大小") @RequestParam(defaultValue = "10") int pageSize) {
         log.info("分页查询用户请求: pageNum={}, pageSize={}", pageNum, pageSize);
         try {
-            var users = userService.findUsersByPage(pageNum, pageSize);
+            List<UserEntity> users = userService.findUsersByPage(pageNum, pageSize);
             return Result.success("查询成功", users);
         } catch (Exception e) {
             log.error("分页查询用户失败: pageNum={}, pageSize={}, error={}", 

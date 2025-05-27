@@ -4,6 +4,7 @@ import domain.entity.UserEntity;
 import domain.entity.UserId;
 import domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import op.study.infra.db.convert.UserAssembler;
 import op.study.infra.db.mp.dao.UserDao;
@@ -21,7 +22,6 @@ import java.util.Optional;
  * 用户仓储实现
  */
 @Slf4j
-@Repository
 public class UserRepositoryImpl extends RepositorySupport<UserEntity, UserId> implements UserRepository {
 
     private final UserService userService;

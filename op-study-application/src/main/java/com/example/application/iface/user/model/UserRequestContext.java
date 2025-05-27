@@ -49,17 +49,16 @@ public class UserRequestContext extends AbstractContext {
     @Builder.Default
     private Map<String, Object> attributes = new HashMap<>();
 
-    public UserRequestContext(FilterSelector filterSelector) {
-        super(filterSelector);
-        this.filterSelector = filterSelector;
-        this.requestTime = LocalDateTime.now();
-    }
-
-    public UserRequestContext(FilterSelector filterSelector, UserRequest userRequest) {
+    public UserRequestContext(FilterSelector filterSelector, UserRequest userRequest, 
+                              LocalDateTime requestTime, String requestId, Long operatorId, 
+                              Map<String, Object> attributes) {
         super(filterSelector);
         this.filterSelector = filterSelector;
         this.userRequest = userRequest;
-        this.requestTime = LocalDateTime.now();
+        this.requestTime = requestTime != null ? requestTime : LocalDateTime.now();
+        this.requestId = requestId;
+        this.operatorId = operatorId;
+        this.attributes = attributes != null ? attributes : new HashMap<>();
     }
 
     @Override
