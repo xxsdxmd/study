@@ -1,13 +1,12 @@
 package op.study.infra.db.mp.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.opstudycommon.enums.EnumUserType;
 import com.example.opstudycommon.enums.UserStatus;
-import com.example.opstudycommon.support.EntityOperations;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import op.study.infra.db.mp.dao.UserDao;
 import op.study.infra.db.mp.event.UserCreateEvent;
@@ -103,7 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDao> implements
     @Override
     public List<UserDao> findByStatus(Integer status) {
         if (status == null) {
-            return List.of();
+            return Lists.newArrayList();
         }
         return getBaseMapper().findByStatus(status);
     }
@@ -155,7 +154,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDao> implements
     @Override
     public List<UserDao> findByUserIds(List<Long> userIds) {
         if (userIds == null || userIds.isEmpty()) {
-            return List.of();
+            return Lists.newArrayList();
         }
         return getBaseMapper().findByUserIds(userIds);
     }
@@ -163,7 +162,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDao> implements
     @Override
     public List<UserDao> searchUsers(String keyword) {
         if (!StringUtils.hasText(keyword)) {
-            return List.of();
+            return Lists.newArrayList();
         }
         return getBaseMapper().searchUsers(keyword);
     }
