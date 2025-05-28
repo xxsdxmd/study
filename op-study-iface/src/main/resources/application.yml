@@ -41,6 +41,28 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
 
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password: 
+    database: 0
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    # 缓存配置
+    cache:
+      type: redis
+      redis:
+        time-to-live: 600000  # 10分钟过期
+        cache-null-values: false
+        use-key-prefix: true
+        key-prefix: "user:cache:"
+
   # Jackson配置
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -78,6 +100,7 @@ logging:
     org.springframework.web: INFO
     org.springframework.security: INFO
     org.mybatis: DEBUG
+    org.springframework.cache: DEBUG
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
     file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
@@ -100,4 +123,18 @@ springdoc:
 app:
   name: 用户域DDD项目
   version: 1.0.0
-  description: 基于DDD架构的用户管理系统 
+  description: 基于DDD架构的用户管理系统
+  
+# 缓存配置
+cache:
+  redis:
+    # 缓存键前缀
+    key-prefix: "user:domain:"
+    # 默认过期时间（秒）
+    default-ttl: 600
+    # 用户缓存过期时间（秒）
+    user-ttl: 1800
+    # 延迟双删时间间隔（毫秒）
+    delay-delete-interval: 500
+    # 分布式锁超时时间（秒）
+    lock-timeout: 10 
