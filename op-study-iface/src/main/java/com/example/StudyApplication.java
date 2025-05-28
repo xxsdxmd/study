@@ -3,22 +3,23 @@ package com.example;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author xxs
- * @Date 2024/12/19
- * 用户域DDD项目启动类
+ * @Date 2024/6/30 14:59
  */
-@SpringBootApplication
-@EnableTransactionManagement
-@MapperScan("op.study.infra.db.mp.mapper")
-@ComponentScan(basePackages = {
-    "com.example",
-    "op.study",
-    "domain"
+@SpringBootApplication(exclude = {
+        org.apache.shardingsphere.spring.boot.ShardingSphereAutoConfiguration.class
 })
+@EnableCaching
+@ComponentScan(basePackages = {
+        "com.example",
+        "op.study",
+        "domain"
+})
+@MapperScan("op.study.infra.db.mp.mapper")
 public class StudyApplication {
 
     public static void main(String[] args) {

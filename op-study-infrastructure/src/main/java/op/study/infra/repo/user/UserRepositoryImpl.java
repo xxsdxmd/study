@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -328,8 +327,8 @@ public class UserRepositoryImpl extends RepositorySupport<UserEntity, UserId> im
             }
 
             // 缓存未命中，查数据库
-            List<UserDao> userDaos = userService.findByStatus(status);
-            List<UserEntity> userEntities = userDaos.stream()
+            List<UserDao> userDaoLists = userService.findByStatus(status);
+            List<UserEntity> userEntities = userDaoLists.stream()
                     .map(userAssembler::convertUserEntity)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());

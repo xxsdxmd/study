@@ -24,13 +24,13 @@ public class UserDao implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID
+     * 主键ID（自增）
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 用户ID（业务ID）
+     * 用户ID（业务ID，雪花算法生成）
      */
     @TableField("user_id")
     private Long userId;
@@ -61,7 +61,7 @@ public class UserDao implements Serializable {
 
     /**
      * 用户状态
-     * 1: 激活, 0: 未激活, -1: 已禁用, -2: 已删除
+     * 0: 未激活, 1: 激活, 2: 已禁用, 3: 已删除
      */
     @TableField("status")
     @Builder.Default

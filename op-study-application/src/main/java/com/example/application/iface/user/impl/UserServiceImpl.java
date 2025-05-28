@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import domain.entity.UserEntity;
 import domain.entity.UserId;
 import domain.service.user.iface.UserDomainService;
+import domain.service.user.UserIdGeneratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
     private final FilterSelectorFactory filterSelectorFactory;
     private final UserDomainService userDomainService;
+    private final UserIdGeneratorService userIdGeneratorService;
 
     @Override
     @Transactional
@@ -302,9 +304,14 @@ public class UserServiceImpl implements UserService {
      * 构建用户实体
      */
     private UserEntity buildUserEntity(UserRequest userRequest) {
+        // 使用雪花算法生成用户ID
+        UserId userId = userIdGeneratorService.generateUserId();
+        
         return UserEntity.builder()
+                .userId(userId)  // 设置生成的用户ID
                 .userName(userRequest.getUserName())
                 .mobilePhone(userRequest.getMobilePhone())
+                .email(userRequest.getEmail())
                 .status(UserStatus.INACTIVE) // 默认未激活状态
                 .build();
     }

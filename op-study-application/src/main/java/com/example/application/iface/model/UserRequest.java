@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -25,4 +26,7 @@ public class UserRequest {
 
     @NotBlank(message = "mobilePhone is not null")
     private String mobilePhone;
+
+    @Email(message = "email format is invalid")
+    private String email;
 }
